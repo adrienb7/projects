@@ -29,12 +29,7 @@ You can also add a brief presentation of the team members with links to your res
 
 This repository contains the code for our project **PROJECT_NAME**, developed during our [Data Scientist training](https://datascientest.com/en/data-scientist-course) at [DataScientest](https://datascientest.com/).
 
-The goal of this project is to **...**
-
-This project was developed by the following team :
-
-- John Doe ([GitHub](https://github.com/) / [LinkedIn](http://linkedin.com/))
-- Martin Dupont ([GitHub](https://github.com/) / [LinkedIn](http://linkedin.com/))
+The goal of this project is to predict success of shots in NBA.
 
 You can browse and run the [notebooks](./notebooks). 
 
