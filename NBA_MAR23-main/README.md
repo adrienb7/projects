@@ -1,8 +1,8 @@
-# NBA
+# Sport predictions
 
 ## Explanations and Instructions
 
-This repository contains the files needed to initialize a project for your [DataScientest](https://datascientest.com/) training.
+This repository contains the files needed to initialize my project on NBA predictions.
 
 It contains mainly the present README.md file and an application template [Streamlit](https://streamlit.io/).
 
