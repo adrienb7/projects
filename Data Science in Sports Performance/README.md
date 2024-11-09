@@ -24,6 +24,7 @@ Optimisation des hyperparamètres à l'aide de GridSearchCV pour maximiser les p
 Résultats
 ------
 XGBoost s'est révélé être le modèle le plus performant, surpassant les autres de plus de 1 % pour certains joueurs après un réglage minutieux.
+La meilleure configuration joueur/modèle atteint une accuracy avoisinant 0.7 pour la prédiction.
 Une analyse comparative détaillée a montré que la combinaison de régularisation et de boosting de gradient dans XGBoost gérait efficacement les relations complexes dans les données.
 
 Résultats et conclusions 
