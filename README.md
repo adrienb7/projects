@@ -7,7 +7,7 @@ Compétences et outils utilisés
 -----
 Les projets présentés dans ce dépôt démontrent l'utilisation de diverses compétences techniques et outils, incluant mais ne se limitant pas à :
 
------
+
 Analyse et Prétraitement des Données
 -----
 
