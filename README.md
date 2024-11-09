@@ -25,7 +25,7 @@ Deep Learning
 Conception de réseaux de neurones avec TensorFlow et Keras.
 Expérience avec des architectures CNN pour l'analyse d'images et LSTM pour les séries temporelles.
 
------
+
 SQL et Gestion des Données
 -----
 
