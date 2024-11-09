@@ -1,60 +1,26 @@
-# NBA
+# NBA PROJECT
 
-## Explanations and Instructions
+Objective: Designed a classification model to predict whether an NBA player’s shot would be successful or not, leveraging data from over 20 seasons (1997-2020). The goal was to enhance predictive accuracy and offer insights into shooting patterns.
 
-This repository contains the files needed to initialize a project for your [DataScientest](https://datascientest.com/) training.
+Data Handling:
 
-It contains mainly the present README.md file and an application template [Streamlit](https://streamlit.io/).
+Worked with a large-scale dataset consisting of over 4 million records.
+Applied data preprocessing techniques, including cleaning, normalization, and integration of additional data from the nba_api.
+Enriched the dataset by creating a custom variable, on_fire, to represent the player's current form based on their past five game performances.
+Feature Engineering:
 
-**README**
+Developed relevant features to reflect player, game, and situational metrics.
+The on_fire feature was engineered to capture momentum and streaks that may influence a player’s shooting confidence and performance.
+Modeling Approach:
 
-The README.md file is a central element of any git repository. It allows you to present your project, its objectives, and to explain how to install and launch the project, or even how to contribute to it.
+Implemented various machine learning models, including Support Vector Machines (SVM), Random Forest, XGBoost, and CatBoost.
+Conducted hyperparameter tuning using GridSearchCV to optimize model performance and ensure robust evaluation.
+Results:
 
-You will have to modify different sections of this README.md to include the necessary informations.
+XGBoost emerged as the leading model, outperforming others by over 1% for certain players after extensive tuning.
+Detailed comparative analysis demonstrated that XGBoost's combination of regularization and gradient boosting effectively handled complex relationships in the data.
+Outcome and Insights:
 
-- Complete the sections (`## Presentation and Installation` `## Streamlit App`) following the instructions in these sections.
-- Delete this section (`## Explanations and Instructions`)
+The project underscored the importance of data enrichment and feature engineering in sports analytics.
+The on_fire variable provided additional predictive power, suggesting that recent form is a significant factor in shot success prediction.
 
-**Streamlit Application**
-
-A [Streamlit] application template (https://streamlit.io/) is available in the [streamlit_app](streamlit_app) folder. You can use this template to start with your project.
-
-## Presentation and Installation
-
-Complete this section with a brief description of your project, the context (including a link to the DataScientest course), and the objectives.
-
-You can also add a brief presentation of the team members with links to your respective networks (GitHub and/or LinkedIn for example).
-
-**Example:**
-
-This repository contains the code for our project **PROJECT_NAME**, developed during our [Data Scientist training](https://datascientest.com/en/data-scientist-course) at [DataScientest](https://datascientest.com/).
-
-The goal of this project is to **...**
-
-This project was developed by the following team :
-
-- John Doe ([GitHub](https://github.com/) / [LinkedIn](http://linkedin.com/))
-- Martin Dupont ([GitHub](https://github.com/) / [LinkedIn](http://linkedin.com/))
-
-You can browse and run the [notebooks](./notebooks). 
-
-You will need to install the dependencies (in a dedicated environment) :
-
-```
-pip install -r requirements.txt
-```
-
-## Streamlit App
-
-**Add explanations on how to use the app.**
-
-To run the app (be careful with the paths of the files in the app):
-
-```shell
-conda create --name my-awesome-streamlit python=3.9
-conda activate my-awesome-streamlit
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-The app should then be available at [localhost:8501](http://localhost:8501).
