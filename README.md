@@ -1,7 +1,7 @@
 Portfolio de Projets Data Science
 -----
 
-Bienvenue dans mon portfolio de projets data science, qui présente des exemples concrets de mes compétences en analyse de données, machine learning et deep learning. Ce dépôt illustre ma capacité à résoudre des problèmes complexes en utilisant une large gamme d'outils et de méthodes.
+Bienvenue dans mon portfolio de projets data science, qui présente des exemples concrets de mes compétences en analyse de données, machine learning et deep learning. 
 
 Compétences et outils utilisés
 -----
