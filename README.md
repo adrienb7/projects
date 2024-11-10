@@ -11,15 +11,20 @@ Bienvenue dans mon portfolio de projets data science, qui présente des exemples
 ### 2. **Modélisation Machine Learning**
    - Implémentation de modèles tels que **régression linéaire**, **Random Forest**, **XGBoost**, etc.
    - Optimisation des modèles par **GridSearchCV** et évaluation avec des métriques robustes (accuracy, F1-score).
+     
+### 3. **Séries Temporelles**
+   - Analyse et modélisation des données temporelles en utilisant des approches telles que **ARIMA**, **Prophet**, et d'autres techniques avancées.
+   - Prédiction de tendances et de schémas saisonniers pour des applications dans divers secteurs.
 
-### 3. **Deep Learning**
+
+### 4. **Deep Learning**
    - Conception de réseaux de neurones avec **TensorFlow** et **Keras**.
    - Expérience avec des architectures CNN pour l'analyse d'images et LSTM pour les séries temporelles.
 
-### 4. **Ingénierie des Caractéristiques**
+### 5. **Ingénierie des Caractéristiques**
    - Création de variables pertinentes pour améliorer la performance des modèles.
 
-### 5. **Visualisation des Résultats**
+### 6. **Visualisation des Résultats**
    - Présentation claire des insights via **Seaborn**, **Plotly**, et **dashboards** interactifs.
 
 ## Conclusion
