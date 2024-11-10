@@ -1,4 +1,4 @@
-# ANALYSE ET PRÉVISION DES PRIX DU BITCOIN
+# PREDIR LE COURS DE CRYPTOMONNAIES EST-IL ENVISEAGEABLE AVEC DES OUTILS DE ML ?
 
 ## Objectif
 Conception d'un modèle de prévision des séries temporelles pour prédire les variations des prix du Bitcoin, en utilisant des données historiques couvrant plusieurs années. L'objectif était d'améliorer la précision des prévisions et d'explorer l'efficacité de divers modèles de machine learning sur des données volatiles.
@@ -17,3 +17,10 @@ Le modèle Prophet a montré des performances prometteuses sur des séries tempo
 
 ## Résultats et conclusions
 Le projet a démontré l'importance de l'intégration de modèles robustes pour gérer la volatilité et les influences externes du marché des cryptomonnaies. La combinaison de modèles traditionnels et avancés a permis d'améliorer la précision des prévisions. Pour des prévisions plus précises, l'intégration de données externes telles que les actualités et les tendances des réseaux sociaux pourrait apporter un bénéfice supplémentaire.
+Nous pourrons essayer d'intégrer le modèle GARCH pour capturer et prédire la volatilité des prix des cryptomonnaies et ainsi améliorer la précision des prévisions.
+
+
+
+
+
+
