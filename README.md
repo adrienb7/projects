@@ -1,6 +1,6 @@
 # Portfolio de Projets Data Science
 
-Bienvenue dans mon portfolio de projets data science, qui présente des exemples concrets de mes compétences en analyse de données, machine learning et deep learning. Ce dépôt illustre ma capacité à résoudre des problèmes complexes en utilisant une large gamme d'outils et de méthodes.
+Portfolio de projets data science, qui présente des exemples concrets de projets en analyse de données, machine learning et deep learning.
 
 ## Compétences Clés
 
@@ -16,7 +16,6 @@ Bienvenue dans mon portfolio de projets data science, qui présente des exemples
    - Analyse et modélisation des données temporelles en utilisant des approches telles que **ARIMA**, **Prophet**, et d'autres techniques avancées.
    - Prédiction de tendances et de schémas saisonniers pour des applications dans divers secteurs.
 
-
 ### 4. **Deep Learning**
    - Conception de réseaux de neurones avec **TensorFlow** et **Keras**.
    - Expérience avec des architectures CNN pour l'analyse d'images et LSTM pour les séries temporelles.
@@ -25,8 +24,4 @@ Bienvenue dans mon portfolio de projets data science, qui présente des exemples
    - Création de variables pertinentes pour améliorer la performance des modèles.
 
 ### 6. **Visualisation des Résultats**
-   - Présentation claire des insights via **Seaborn**, **Plotly**, et **dashboards** interactifs.
-
-## Conclusion
-
-Ce portfolio témoigne de ma maîtrise des projets de data science de bout en bout, avec un souci de rigueur et d'adaptabilité aux besoins du domaine.
+   - Présentation claire des insights via **Seaborn**, **Plotly**.
