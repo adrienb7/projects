@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "8fa07312-e3dc-4bcb-9c68-49142f0e88a9",
+		"name": "End-to-End Tests",
+		"description": "> This collection features end-to-end tests that ensure the Intergalactic Bank API components function in an expected sequence. Check out the [Functional testing collection](https://www.postman.com/templates/f26ad070-d626-4d75-b151-7cbf1a48ed11/Functional-testing) and [Integration testing collection](https://www.postman.com/templates/6f788c17-067a-4074-a528-d07df1df9529/Integration-testing-%23example) for other test cases for this API. \n  \n\n## **🪐 Get started**\n\nThe fictional Intergalactic Bank Services team is responsible for testing the end-to-end workflows in this collection. You can use this collection to validate specific workflows for your team or figure out ways to increase your test coverage and make your applications more resilient.\n\nTo test the Intergalactic Bank API, you can:\n\n1. **Review tests and scripts:** Check out the [tests](https://learning.postman.com/docs/writing-scripts/test-scripts/) in the Scripts tab of a collection, folder, or request. You’ll also find additional steps in the Pre-request Script, such as for passing data between requests or building up POST request payloads.\n    \n2. **Run tests:** To run the collection, select Run collection from the collection menu. If you are interested in testing one of the use cases, select Run folder from the use case folder menu. Keep in mind that many of these tests contain logic that passes information between requests, and they are meant to be run in order from top to bottom. If you send the requests manually or out of order, your results may vary.\n    \n3. **Review test results:** Many of the test cases contain error messages to help debug service errors. If you’re using this collection as a pre-merge check, ensure that all tests are passing before submitting (and no, deleting the failing test cases isn’t an option 😉).\n    \n\nCheck out the additional sections below or select View complete documentation. For context-sensitive help with a folder or request, look for the documentation icon.\n\n## 🧑‍💻How your team can use this collection\n\n- **Add a mock server to speed up development:** Adding functionality to this service? Since this collection has example responses, you can add a mock server that will return the expected results. Start writing tests against the mock, and once your additions are live, you can swap out the URLs and have a live test suite.\n    \n- **Integrate tests with your CI/CD pipeline:** This comprehensive test suite is a great addition to your existing CI/CD pipeline. Generate the Postman CLI command from the Collection Runner and add this step to your existing checks each time you make a commit affecting this service.\n    \n- **Add a monitor:** If your team is contributing to or relying on this service, it’s a good idea to keep tabs on the status. Adding a monitor to this collection can give you confidence that the service is up and running and alert you to any breaking changes that may have occurred.\n    \n\n## 🔍 What we’re testing\n\n- A very common workflow is the transfer of funds between accounts. We have two scenarios: one which creates all resources and successfully transfers funds, and one which tries the transfer with insufficient funds.\n    \n- During these workflows, we are testing for data correctness, data types, and that data is successfully passed through the system during creation and retrieval.\n    \n\n## 🔒A note on authorization\n\nThis API uses an API key-based authorization. In this collection, we set the authorization at the collection level and generate a new API Key for each test run.\n\n## 👀 View and share run results\n\nInterested in seeing previous run results? We’re happy to share, and have a few ways for you to stay in the loop:\n\n- **Runs tab:** View past collection runs in the `Runs` tab of this collection. Here, you can see the results of past runs, including who ran them and whether it was via the Collection Runner or the CLI. You can also share individual run reports from this page.\n    \n- **Monitors:** If you have a monitor set up for this collection, you can see historical run information when you select the Monitors tab in the left sidebar. You can also have the results sent to Slack or other services when you set up a corresponding integration.\n    \n\n### 🤝Increase test coverage\n\nThe Intergalactic Bank Services team wants your team to have everything they need to successfully test our services with their applications. Is your team utilizing this API in a use case not represented here? Reach out to us on our internal Slack by tagging `@bank-services`. Or add an [inline comment](https://learning.postman.com/docs/collaborating-in-postman/working-with-your-team/discussing-your-work/) to this collection with your test case suggestions.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19741277",
+		"_collection_link": "https://datascientest-9280.postman.co/workspace/DATASCIENTEST~83e37380-5428-4768-a99a-ed44244cdd85/collection/19741277-8fa07312-e3dc-4bcb-9c68-49142f0e88a9?action=share&source=collection_link&creator=19741277"
+	},
+	"item": [
+		{
+			"name": "TEST SOUTENANCE ACCIDENTS",
+			"item": [
+				{
+					"name": "TEST NOT_SECURE HEALT CHECK ALIVE",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-length": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PROTOCLE}}/{{DOCKER_HOST}}/{{API_VERSION}}/test",
+							"host": [
+								"{{PROTOCLE}}"
+							],
+							"path": [
+								"{{DOCKER_HOST}}",
+								"{{API_VERSION}}",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST SECURE HEALT CHECK ALIVE Copy",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-length": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PROTOCLE}}/{{DOCKER_HOST}}/{{API_VERSION}}/test/echo",
+							"host": [
+								"{{PROTOCLE}}"
+							],
+							"path": [
+								"{{DOCKER_HOST}}",
+								"{{API_VERSION}}",
+								"test",
+								"echo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RELOAD_MODEL_RANDOMFOREST",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{RELOAD_MODEL}}/{{MODEL_RANDOMFOREST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{RELOAD_MODEL}}",
+								"{{MODEL_RANDOMFOREST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RELOAD_MODEL_MLP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PROTOCLE}}/{{DOCKER_HOST}}/{{API_VERSION}}/{{RELOAD_MODEL}}/{{MODEL_MLP_NAME}}",
+							"host": [
+								"{{PROTOCLE}}"
+							],
+							"path": [
+								"{{DOCKER_HOST}}",
+								"{{API_VERSION}}",
+								"{{RELOAD_MODEL}}",
+								"{{MODEL_MLP_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RELOAD_MODEL_WITH_VERSION_MLP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PROTOCLE}}/{{DOCKER_HOST}}/{{API_VERSION}}/{{RELOAD_MODEL}}/{{MODEL_MLP_NAME}}?version=3",
+							"host": [
+								"{{PROTOCLE}}"
+							],
+							"path": [
+								"{{DOCKER_HOST}}",
+								"{{API_VERSION}}",
+								"{{RELOAD_MODEL}}",
+								"{{MODEL_MLP_NAME}}"
+							],
+							"query": [
+								{
+									"key": "version",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RELOAD_MODEL_SVC",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{RELOAD_MODEL}}/{{MODEL_SVC_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{RELOAD_MODEL}}",
+								"{{MODEL_SVC_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RELOAD_MODEL_BEST",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PROTOCLE}}/{{DOCKER_HOST}}/{{API_VERSION}}/{{RELOAD_MODEL}}/{{MODEL_BEST_NAME}}",
+							"host": [
+								"{{PROTOCLE}}"
+							],
+							"path": [
+								"{{DOCKER_HOST}}",
+								"{{API_VERSION}}",
+								"{{RELOAD_MODEL}}",
+								"{{MODEL_BEST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_SVC",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{X-Api-Key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_SVC_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_SVC_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_MLP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 14.0,\n    \"mois\": 7.0,\n    \"an\": 2023.0,\n    \"hrmn\": 525.0,\n    \"lum\": 1.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 3.0,\n    \"lat\": 47.166595,\n    \"long\": -0.972322,\n    \"catr\": 3.0,\n    \"circ\": 2.0,\n    \"nbv\": 0.0,\n    \"vosp\": 0.0,\n    \"prof\": 1.0,\n    \"plan\": 1.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 80.0,\n    \"senc\": 2.0,\n    \"catv\": 10.0,\n    \"obs\": 0.0,\n    \"obsm\": 0.0,\n    \"choc\": 8.0,\n    \"manv\": 1.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 1.0,\n    \"an_nais\": 1970.0,\n    \"secu1\": 8.0,\n    \"secu2\": -1.0,\n    \"secu3\": -1.0,\n    \"locp\": 0.0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_MLP_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_MLP_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_MLP_GRAV_3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 14.0,\n    \"mois\": 7.0,\n    \"an\": 2023.0,\n    \"hrmn\": 525.0,\n    \"lum\": 1.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 3.0,\n    \"lat\": 47.166595,\n    \"long\": -0.972322,\n    \"catr\": 3.0,\n    \"circ\": 2.0,\n    \"nbv\": 0.0,\n    \"vosp\": 0.0,\n    \"prof\": 1.0,\n    \"plan\": 1.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 80.0,\n    \"senc\": 2.0,\n    \"catv\": 10.0,\n    \"obs\": 0.0,\n    \"obsm\": 0.0,\n    \"choc\": 8.0,\n    \"manv\": 1.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 1.0,\n    \"an_nais\": 1970.0,\n    \"secu1\": 8.0,\n    \"secu2\": -1.0,\n    \"secu3\": -1.0,\n    \"locp\": 0.0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_MLP_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_MLP_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_RANDOMFOREST",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 14.0,\n    \"mois\": 7.0,\n    \"an\": 2023.0,\n    \"hrmn\": 525.0,\n    \"lum\": 1.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 3.0,\n    \"lat\": 47.166595,\n    \"long\": -0.972322,\n    \"catr\": 3.0,\n    \"circ\": 2.0,\n    \"nbv\": 0.0,\n    \"vosp\": 0.0,\n    \"prof\": 1.0,\n    \"plan\": 1.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 80.0,\n    \"senc\": 2.0,\n    \"catv\": 10.0,\n    \"obs\": 0.0,\n    \"obsm\": 0.0,\n    \"choc\": 8.0,\n    \"manv\": 1.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 1.0,\n    \"an_nais\": 1970.0,\n    \"secu1\": 8.0,\n    \"secu2\": -1.0,\n    \"secu3\": -1.0,\n    \"locp\": 0.0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_RANDOMFOREST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_RANDOMFOREST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_RANDOMFOREST_GRAV_3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 0.0,\n    \"mois\": 11.0,\n    \"an\": 2019.0,\n    \"hrmn\": 170.0,\n    \"lum\": 3.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 6.0,\n    \"lat\": 48.9307,\n    \"long\": 2.3688,\n    \"catr\": 1.0,\n    \"circ\": 1.0,\n    \"nbv\": 2.0,\n    \"vosp\": 0.0,\n    \"prof\": 4.0,\n    \"plan\": 2.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 70.0,\n    \"senc\": 1.0,\n    \"catv\": 7.0,\n    \"obs\": 4.0,\n    \"obsm\": 0.0,\n    \"choc\": 1.0,\n    \"manv\": 0.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 2.0,\n    \"an_nais\": 1994.0,\n    \"secu1\": 1.0,\n    \"secu2\": 0.0,\n    \"secu3\": -1.0,\n    \"locp\": -1.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_RANDOMFOREST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_RANDOMFOREST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_BEST_GRAV_0",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{Api-Key}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{X-Api-Key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 14.0,\n    \"mois\": 7.0,\n    \"an\": 2023.0,\n    \"hrmn\": 525.0,\n    \"lum\": 1.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 3.0,\n    \"lat\": 47.166595,\n    \"long\": -0.972322,\n    \"catr\": 3.0,\n    \"circ\": 2.0,\n    \"nbv\": 0.0,\n    \"vosp\": 0.0,\n    \"prof\": 1.0,\n    \"plan\": 1.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 80.0,\n    \"senc\": 2.0,\n    \"catv\": 10.0,\n    \"obs\": 0.0,\n    \"obsm\": 0.0,\n    \"choc\": 8.0,\n    \"manv\": 1.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 1.0,\n    \"an_nais\": 1970.0,\n    \"secu1\": 8.0,\n    \"secu2\": -1.0,\n    \"secu3\": -1.0,\n    \"locp\": 0.0\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_BEST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_BEST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_BEST_GRAV_3",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{Api-Key}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{X-Api-Key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 0.0,\n    \"mois\": 11.0,\n    \"an\": 2019.0,\n    \"hrmn\": 170.0,\n    \"lum\": 3.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 6.0,\n    \"lat\": 48.9307,\n    \"long\": 2.3688,\n    \"catr\": 1.0,\n    \"circ\": 1.0,\n    \"nbv\": 2.0,\n    \"vosp\": 0.0,\n    \"prof\": 4.0,\n    \"plan\": 2.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 70.0,\n    \"senc\": 1.0,\n    \"catv\": 7.0,\n    \"obs\": 4.0,\n    \"obsm\": 0.0,\n    \"choc\": 1.0,\n    \"manv\": 0.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 2.0,\n    \"an_nais\": 1994.0,\n    \"secu1\": 1.0,\n    \"secu2\": 0.0,\n    \"secu3\": -1.0,\n    \"locp\": -1.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_BEST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_BEST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_BEST_GRAV_3_bad_apikey",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "xxx-xxxx-xxx-xxx",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{X-Api-Key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "xxx-xxx-xxx-xxx",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 0.0,\n    \"mois\": 11.0,\n    \"an\": 2019.0,\n    \"hrmn\": 170.0,\n    \"lum\": 3.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 6.0,\n    \"lat\": 48.9307,\n    \"long\": 2.3688,\n    \"catr\": 1.0,\n    \"circ\": 1.0,\n    \"nbv\": 2.0,\n    \"vosp\": 0.0,\n    \"prof\": 4.0,\n    \"plan\": 2.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 70.0,\n    \"senc\": 1.0,\n    \"catv\": 7.0,\n    \"obs\": 4.0,\n    \"obsm\": 0.0,\n    \"choc\": 1.0,\n    \"manv\": 0.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 2.0,\n    \"an_nais\": 1994.0,\n    \"secu1\": 1.0,\n    \"secu2\": 0.0,\n    \"secu3\": -1.0,\n    \"locp\": -1.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_BEST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_BEST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_BEST_ERROR_PAYLOAD_lum",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{Api-Key}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{X-Api-Key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 0.0,\n    \"mois\": 11.0,\n    \"an\": 2019.0,\n    \"hrmn\": 170.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 6.0,\n    \"lat\": 48.9307,\n    \"long\": 2.3688,\n    \"catr\": 1.0,\n    \"circ\": 1.0,\n    \"nbv\": 2.0,\n    \"vosp\": 0.0,\n    \"prof\": 4.0,\n    \"plan\": 2.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 70.0,\n    \"senc\": 1.0,\n    \"catv\": 7.0,\n    \"obs\": 4.0,\n    \"obsm\": 0.0,\n    \"choc\": 1.0,\n    \"manv\": 0.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 2.0,\n    \"an_nais\": 1994.0,\n    \"secu1\": 1.0,\n    \"secu2\": 0.0,\n    \"secu3\": -1.0,\n    \"locp\": -1.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_BEST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_BEST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PREDICT_MODEL_BEST_ERROR_PAYLOAD_apikey",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{Api-Key}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{X-Api-Key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{X-Api-Key}}",
+								"value": "{{Api-Key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jour\": 0.0,\n    \"mois\": 11.0,\n    \"an\": 2019.0,\n    \"hrmn\": 170.0,\n    \"agg\": 1.0,\n    \"atm\": 1.0,\n    \"col\": 6.0,\n    \"lat\": 48.9307,\n    \"long\": 2.3688,\n    \"catr\": 1.0,\n    \"circ\": 1.0,\n    \"nbv\": 2.0,\n    \"vosp\": 0.0,\n    \"prof\": 4.0,\n    \"plan\": 2.0,\n    \"surf\": 1.0,\n    \"infra\": 0.0,\n    \"situ\": 1.0,\n    \"vma\": 70.0,\n    \"senc\": 1.0,\n    \"catv\": 7.0,\n    \"obs\": 4.0,\n    \"obsm\": 0.0,\n    \"choc\": 1.0,\n    \"manv\": 0.0,\n    \"motor\": 1.0,\n    \"place\": 1.0,\n    \"catu\": 1.0,\n    \"sexe\": 2.0,\n    \"an_nais\": 1994.0,\n    \"secu1\": 1.0,\n    \"secu2\": 0.0,\n    \"secu3\": -1.0,\n    \"locp\": -1.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DOCKER_HOST}}/{{API_VERSION}}/{{PREDICT_MODEL}}/{{MODEL_BEST_NAME}}",
+							"host": [
+								"{{DOCKER_HOST}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"{{PREDICT_MODEL}}",
+								"{{MODEL_BEST_NAME}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This folder tests a commonly used workflow of creating new accounts and transferring funds between the two.\n\nBecause we expect all requests to succeed in this workflow, we have a **status check test** in the **folder-level Scripts tab**.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//all requests in this folder should be valid",
+							"pm.test(\"Folder-level status check\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "api-key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://template.postman-echo.com",
+			"type": "string"
+		},
+		{
+			"key": "apiKey",
+			"value": "OMpqVWAH.UC80wyXTtPwhDgAUdCTx6"
+		}
+	]
+}

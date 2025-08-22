@@ -1,0 +1,292 @@
+version: '3.7'
+#sudo systemctl restart apparmor
+# Le reste n'est pas nécéssaire
+#sudo aa-remove-unknown # docker-default
+# sudo aa-status | grep docker
+# sudo apparmor_parser -R /etc/apparmor.d/docker-default
+volumes:
+  postgres_data_accidents:
+    driver: local
+  postgres_data_accidents_backup:
+    driver: local
+  #api:
+  #  driver: local
+  minio_data:
+    driver: local
+
+networks:
+  front-tier:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
+          # gateway: 192.168.0.1
+  back-tier:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/16
+          # gateway: 192.169.0.
+
+
+
+services:
+  postgresql_accidents:
+    env_file:
+      - .env
+    build: db
+    shm_size: 2g
+    container_name: postgresql_accidents
+    hostname: postgresql_accidents
+    restart: always
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    #secrets:
+    #  - pg_user_secret
+    #  - pg_password_secret
+    #
+    ports:
+      # le service n'est accessible que dans le network back-tier
+      - "0.0.0.0:5435:${PG_PORT}"
+    #  - "0.0.0.0:5435:5432"
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      #  POSTGRES_USER_FILE: /run/secrets/pg_user_secret
+      #  POSTGRES_PASSWORD_FILE: /run/secrets/pg_password_secret
+      #- PYTHONPATH=/var/lib/postgresql/python
+    volumes:
+      - postgres_data_accidents_backup:/var/lib/postgresql/backup
+      - postgres_data_accidents:/var/lib/postgresql/data
+      #- postgres_data_accidents_python:/var/lib/postgresql/python
+      #- /var/tmp/dump:/var/tmp/dump
+      - ./db/conf/postgresql.conf:/etc/postgresql/postgresql.conf
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "airflow" ]
+      interval: 5s
+      retries: 5
+    networks:
+      - back-tier
+
+  adminer:
+    image: adminer:latest
+    hostname: adminer_server
+    container_name: adminer
+    ports:
+      - "0.0.0.0:8088:8080"
+    depends_on:
+      - postgresql_accidents
+    networks:
+      - back-tier
+      - front-tier
+
+  app:
+    build: fastapi
+    container_name: app_accidents
+    hostname: fastapi_server
+    ports:
+      - "0.0.0.0:${EXT_FAST_API_PORT}:${LOCAL_FAST_API_PORT}"
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow-server:5000
+
+    depends_on:
+      - mlflow-server
+      - postgresql_accidents
+    volumes:
+      - ./fastapi/app:/app
+    networks:
+      - back-tier
+      - front-tier
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://app:${LOCAL_FAST_API_PORT}/api/v1/test" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mlflow-server:
+    build:
+      context: mlflow
+      dockerfile: Dockerfile.mlflow
+    hostname: mlflow_server
+    container_name: mlflow
+    env_file:
+      - .env
+    environment:
+      - AWS_ACCESS_KEY_ID=${MINIO_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_SECRET_ACCESS_KEY}
+      #- MINIO_ROOT_USER=${MINIO_ACCESS_KEY}
+      #- MINIO_ROOT_PASSWORD=${MINIO_SECRET_KEY}
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:${MINIO_API_PORT}
+      - MLFLOW_S3_IGNORE_TLS=true
+    ports:
+      - "0.0.0.0:${MLFLOW_PORT}:${MLFLOW_PORT}"
+    depends_on:
+      - postgresql_accidents
+      - minio
+    networks:
+      - back-tier
+      - front-tier
+    # <dialect>+<driver>://<username>:<password>@<host>:<port>/<database>.
+    # command: [ "mlflow", "server", "--backend-store-uri", "postgresql+psycopg2://${PG_USER_MLFLOW}:${PG_PASSWORD_MLFLOW}@postgresql_accidents:${PG_PORT}/${PG_DB_MLFLOW_NAME}", "-h 0.0.0.0" ]
+    #command: [ "mlflow", "server", "--backend-store-uri", "postgresql+psycopg2://mlflow_user:zcb8TXWa2bkY@postgresql_accidents:${PG_PORT}/${PG_DB_MLFLOW_NAME}", "-h 0.0.0.0", "--serve-artifacts", "--artifacts-destination", "s3://${MINIO_BUCKET_NAME}" ]
+    command: >
+     bash -c "
+      mlflow db upgrade postgresql+psycopg2://mlflow_user:zcb8TXWa2bkY@postgresql_accidents:${PG_PORT}/${PG_DB_MLFLOW_NAME} &&
+      mlflow server --backend-store-uri postgresql+psycopg2://mlflow_user:zcb8TXWa2bkY@postgresql_accidents:${PG_PORT}/${PG_DB_MLFLOW_NAME} -h 0.0.0.0 --serve-artifacts --artifacts-destination s3://${MINIO_BUCKET_NAME}
+     "
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://mlflow_server:${MLFLOW_PORT}/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  minio:
+    image: minio/minio:RELEASE.2025-04-08T15-41-24Z
+    hostname: minio_server
+    container_name: minio
+    volumes:
+      - minio_data:/data
+    ports:
+      - "${MINIO_API_ADDRESS}:${MINIO_API_PORT}"
+      - "${MINIO_CONSOLE_ADDRESS}:${MINIO_CONSOLE_PORT}"
+    environment:
+      - MINIO_ROOT_USER=minio #${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=minio123 #${MINIO_ROOT_PASSWORD}
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_ACCESS_KEY}
+      - MINIO_DEFAULT_BUCKETS=${MINIO_BUCKET_NAME}
+      - MINIO_ADDRESS=${MINIO_API_ADDRESS}
+      - MINIO_PORT=${MINIO_API_PORT}
+      - MINIO_STORAGE_USE_HTTPS=${MINIO_STORAGE_USE_HTTPS}
+      - MINIO_CONSOLE_ADDRESS=${MINIO_CONSOLE_ADDRESS}
+    command: [ "server", "--console-address", "${MINIO_CONSOLE_ADDRESS}", "/data" ]
+    networks:
+      - back-tier
+      - front-tier
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://minio:${MINIO_API_PORT}/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  #createbuckets:
+  #  image: minio/minio:RELEASE.2025-04-08T15-41-24Z
+  #  depends_on:
+  #    - minio
+  #  entrypoint: >
+  #    /bin/sh -c " /usr/bin/mc config host add accidents http://minio:${MINIO_API_PORT} ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}; /usr/bin/mc mb accidents/${MINIO_BUCKET_NAME}; /usr/bin/mc policy download accidents/${MINIO_BUCKET_NAME}"; exit 0;
+  #  # /bin/sh -c " /usr/bin/mc config host add accidents http://minio_server:${MINIO_API_PORT} ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}; /usr/bin/mc rm -r --force accidents/${MINIO_BUCKET_NAME}; /usr/bin/mc mb accidents/${MINIO_BUCKET_NAME}; /usr/bin/mc policy download accidents/${MINIO_BUCKET_NAME}"; exit 0;
+
+
+  x-airflow-common:
+    #image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.8.1}
+    &airflow-common
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    environment: &airflow-common-env
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      PYTHONPATH: /opt/airflow/scripts:${PYTHONPATH}
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:zcb8TXWa2bkK@postgresql_accidents/airflow
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow_user:zcb8TXWa2bkK@postgresql_accidents/airflow
+      AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+      AIRFLOW__CORE__FERNET_KEY: ""
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__API__AUTH_BACKEND: "airflow.api.auth.backend.basic_auth"
+      AIRFLOW__SMTP__SMTP_HOST: "smtp.gmail.com"
+      AIRFLOW__SMTP__SMTP_PORT: 587
+      AIRFLOW__SMTP__SMTP_USER: "de.airflow@gmail.com"
+      AIRFLOW__SMTP__SMTP_PASSWORD: "cfsrvkongsobheta"
+      AIRFLOW__SMTP__SMTP_MAIL_FROM: "de.airflow@gmail.com"
+      MLFLOW_TRACKING_LOG_LEVEL: DEBUG
+      MLFLOW_TRACKING_URI: http://mlflow-server:5000
+      _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- scikit-learn mlflow}
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - type: bind
+        source: ./data/preprocessed
+        target: /app/data/preprocessed
+      - type: bind
+        source: ./data/raw
+        target: /app/data/raw
+    user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
+    networks:
+      - back-tier
+      - front-tier
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgresql_accidents:
+        condition: service_healthy
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      - back-tier
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 30s
+      retries: 50
+    restart: always
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - 8080:8080
+    networks:
+      - back-tier
+      - front-tier
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://localhost:8080/health" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    healthcheck:
+      test: [ "CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"' ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+  airflow-worker:
+    <<: *airflow-common
+    command: celery worker
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+  airflow-init:
+    <<: *airflow-common
+    command: version
+    environment:
+      <<: *airflow-common-env
+      _AIRFLOW_DB_UPGRADE: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
+      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+  flower:
+    <<: *airflow-common
+    command: celery flower
+    ports:
+      - 5555:5555
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://localhost:5555/" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always

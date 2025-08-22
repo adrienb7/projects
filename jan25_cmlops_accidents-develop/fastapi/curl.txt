@@ -1,0 +1,235 @@
+# Test api_key
+curl -X 'POST' \
+  'http://0.0.0.0:8089/api/v1/predict' \
+  -H "Content-Type: application/json" \
+  -H 'accept: application/json' \
+  -H 'X-Api-Key: 2eeq-3Ic1-z4Cq-2fdg-0j62-y1B4' \
+  -d '{"data":[{"long": 0.145},{"lat": 2.145}]}'
+
+
+curl -X 'POST' \
+  'http://0.0.0.0:8089/api/v1/reload_model/MLP' \
+  -H "Content-Type: application/json" \
+  -H 'accept: application/json' 
+
+curl -X 'POST' \
+  'http://0.0.0.0:8089/api/v1/reload_model/RandomForest' \
+  -H "Content-Type: application/json" \
+  -H 'accept: application/json' 
+
+curl -X 'POST' \
+  'http://0.0.0.0:8089/api/v1/reload_model/BestModel' \
+  -H "Content-Type: application/json" \
+  -H 'accept: application/json'  \
+  -H "X-Api-Key: 2eeq-3Ic1-z4Cq-2fdg-0j6"
+
+curl -X 'POST'   'http://0.0.0.0:8089/api/v1/reload_model/MLP?version=1' \
+  -H "Content-Type: application/json"   -H 'accept: application/json' 
+
+# Predict avec payload gravité 0
+curl -X POST "http://0.0.0.0:8089/api/v1/predict/MLP" \
+  -H "Content-Type: application/json" \
+  -H "X-Api-Key: 2eeq-3Ic1-z4Cq-2fdg-0j6" \
+  -d '{
+    "jour": 14.0,
+    "mois": 7.0,
+    "an": 2023.0,
+    "hrmn": 525.0,
+    "lum": 1.0,
+    "agg": 1.0,
+    "atm": 1.0,
+    "col": 3.0,
+    "lat": 47.166595,
+    "long": -0.972322,
+    "catr": 3.0,
+    "circ": 2.0,
+    "nbv": 0.0,
+    "vosp": 0.0,
+    "prof": 1.0,
+    "plan": 1.0,
+    "surf": 1.0,
+    "infra": 0.0,
+    "situ": 1.0,
+    "vma": 80.0,
+    "senc": 2.0,
+    "catv": 10.0,
+    "obs": 0.0,
+    "obsm": 0.0,
+    "choc": 8.0,
+    "manv": 1.0,
+    "motor": 1.0,
+    "place": 1.0,
+    "catu": 1.0,
+    "sexe": 1.0,
+    "an_nais": 1970.0,
+    "secu1": 8.0,
+    "secu2": -1.0,
+    "secu3": -1.0,
+    "locp": 0.0
+}'
+
+#30	11	2019	170	3	1	1	6	48.9307	2.3688	1	1	2	0	4	2	1	0	1	70	1	7	4	0	1	0	1	1	1	2	1994.0	1	0	-1	-1 => gravité 3
+curl -X POST "http://0.0.0.0:8089/api/v1/predict/MLP" \
+  -H "Content-Type: application/json" \
+  -H "X-Api-Key: 2eeq-3Ic1-z4Cq-2fdg-0j62-y1B4" \
+  -d '{
+    "jour": 0.0,
+    "mois": 11.0,
+    "an": 2019.0,
+    "hrmn": 170.0,
+    "lum": 3.0,
+    "agg": 1.0,
+    "atm": 1.0,
+    "col": 6.0,
+    "lat": 48.9307,
+    "long": 2.3688,
+    "catr": 1.0,
+    "circ": 1.0,
+    "nbv": 2.0,
+    "vosp": 0.0,
+    "prof": 4.0,
+    "plan": 2.0,
+    "surf": 1.0,
+    "infra": 0.0,
+    "situ": 1.0,
+    "vma": 70.0,
+    "senc": 1.0,
+    "catv": 7.0,
+    "obs": 4.0,
+    "obsm": 0.0,
+    "choc": 1.0,
+    "manv": 0.0,
+    "motor": 1.0,
+    "place": 1.0,
+    "catu": 1.0,
+    "sexe": 2.0,
+    "an_nais": 1994.0,
+    "secu1": 1.0,
+    "secu2": 0.0,
+    "secu3": -1.0,
+    "locp": -1.0
+}'
+
+curl -X POST "http://0.0.0.0:8089/api/v1/predict/RandomForest" \
+  -H "Content-Type: application/json" \
+  -H "X-Api-Key: 2eeq-3Ic1-z4Cq-2fdg-0j62-y1B4" \
+  -d '{
+    "jour": 0.0,
+    "mois": 11.0,
+    "an": 2019.0,
+    "hrmn": 170.0,
+    "lum": 3.0,
+    "agg": 1.0,
+    "atm": 1.0,
+    "col": 6.0,
+    "lat": 48.9307,
+    "long": 2.3688,
+    "catr": 1.0,
+    "circ": 1.0,
+    "nbv": 2.0,
+    "vosp": 0.0,
+    "prof": 4.0,
+    "plan": 2.0,
+    "surf": 1.0,
+    "infra": 0.0,
+    "situ": 1.0,
+    "vma": 70.0,
+    "senc": 1.0,
+    "catv": 7.0,
+    "obs": 4.0,
+    "obsm": 0.0,
+    "choc": 1.0,
+    "manv": 0.0,
+    "motor": 1.0,
+    "place": 1.0,
+    "catu": 1.0,
+    "sexe": 2.0,
+    "an_nais": 1994.0,
+    "secu1": 1.0,
+    "secu2": 0.0,
+    "secu3": -1.0,
+    "locp": -1.0
+}'
+
+curl -X POST "http://0.0.0.0:8089/api/v1/predict/BestModel" \
+  -H "Content-Type: application/json" \
+  -H "X-Api-Key: 2eeq-3Ic1-z4Cq-2fdg-0j62-y1B4" \
+  -d '{
+    "jour": 0.0,
+    "mois": 11.0,
+    "an": 2019.0,
+    "hrmn": 170.0,
+    "lum": 3.0,
+    "agg": 1.0,
+    "atm": 1.0,
+    "col": 6.0,
+    "lat": 48.9307,
+    "long": 2.3688,
+    "catr": 1.0,
+    "circ": 1.0,
+    "nbv": 2.0,
+    "vosp": 0.0,
+    "prof": 4.0,
+    "plan": 2.0,
+    "surf": 1.0,
+    "infra": 0.0,
+    "situ": 1.0,
+    "vma": 70.0,
+    "senc": 1.0,
+    "catv": 7.0,
+    "obs": 4.0,
+    "obsm": 0.0,
+    "choc": 1.0,
+    "manv": 0.0,
+    "motor": 1.0,
+    "place": 1.0,
+    "catu": 1.0,
+    "sexe": 2.0,
+    "an_nais": 1994.0,
+    "secu1": 1.0,
+    "secu2": 0.0,
+    "secu3": -1.0,
+    "locp": -1.0
+}'
+
+
+curl -X POST "http://0.0.0.0:8089/api/v1/predict/RandomForest" \
+  -H "Content-Type: application/json" \
+  -H "X-Api-Key: 2eeq-3Ic1-z4Cq-2fdg-0j62-y1B4" \
+  -d '{
+    "jour": 0.0,
+    "mois": 11.0,
+    "an": 2019.0,
+    "hrmn": 170.0,
+    "lum": 3.0,
+    "agg": 1.0,
+    "atm": 1.0,
+    "col": 6.0,
+    "lat": 48.9307,
+    "long": 2.3688,
+    "catr": 1.0,
+    "circ": 1.0,
+    "nbv": 2.0,
+    "vosp": 0.0,
+    "prof": 4.0,
+    "plan": 2.0,
+    "surf": 1.0,
+    "infra": 0.0,
+    "situ": 1.0,
+    "vma": 70.0,
+    "senc": 1.0,
+    "catv": 7.0,
+    "obs": 4.0,
+    "obsm": 0.0,
+    "choc": 1.0,
+    "manv": 0.0,
+    "motor": 1.0,
+    "place": 1.0,
+    "catu": 1.0,
+    "sexe": 2.0,
+    "an_nais": 1994.0,
+    "secu1": 1.0,
+    "secu2": 0.0,
+    "secu3": -1.0,
+    "locp": -1.0
+}'
