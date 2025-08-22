@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1744364120826
+current_stage: None
+description: ''
+last_updated_timestamp: 1744364120826
+name: Model2
+run_id: 9c59d03b8127499eb9c11ea549cb5cc7
+run_link: ''
+source: file:///home/ubuntu/MLflow_Course/mlruns/212788986025115102/9c59d03b8127499eb9c11ea549cb5cc7/artifacts/projet_accidents
+status: READY
+status_message: null
+storage_location: file:///home/ubuntu/MLflow_Course/mlruns/212788986025115102/9c59d03b8127499eb9c11ea549cb5cc7/artifacts/projet_accidents
+user_id: null
+version: 1

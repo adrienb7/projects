@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1744364144714
+current_stage: None
+description: ''
+last_updated_timestamp: 1744364144714
+name: Model2
+run_id: ee63aec56634423098f2cf0535237175
+run_link: ''
+source: file:///home/ubuntu/MLflow_Course/mlruns/379032889499689169/ee63aec56634423098f2cf0535237175/artifacts/rf_apples
+status: READY
+status_message: null
+storage_location: file:///home/ubuntu/MLflow_Course/mlruns/379032889499689169/ee63aec56634423098f2cf0535237175/artifacts/rf_apples
+user_id: null
+version: 2
